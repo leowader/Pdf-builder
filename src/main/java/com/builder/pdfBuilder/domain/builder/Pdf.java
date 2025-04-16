@@ -26,7 +26,7 @@ public class Pdf {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Format format;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private DtoPaymentDetails paymentInfo;
+    private DtoPaymentDetails paymentDetails;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private DtoUserInfo userInfo;
 
@@ -75,8 +75,8 @@ public class Pdf {
             return this;
         }
 
-        public PdfBuilder paymentInfo(DtoPaymentDetails paymentInfo) {
-            pdf.paymentInfo = paymentInfo;
+        public PdfBuilder paymentDetails(DtoPaymentDetails paymentInfo) {
+            pdf.paymentDetails = paymentInfo;
             return this;
         }
 

@@ -18,4 +18,6 @@ public class DtoPdf {
     private boolean includeTimeStamp;
     private String footerMessage;
     private Format format;
+    private DtoUserInfo userInfo;
+    private DtoPaymentDetails paymentDetails;
 }
