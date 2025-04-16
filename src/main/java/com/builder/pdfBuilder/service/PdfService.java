@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.UUID;
 
 
 @Service
@@ -33,7 +34,8 @@ public class PdfService {
 
 
     public String generatePdf(Pdf pdfData, String filePath) {
-        try (OutputStream outputStream = new FileOutputStream(filePath)) {
+        String uniqueName = "reporte_" + UUID.randomUUID() + ".pdf";
+        try (OutputStream outputStream = new FileOutputStream(filePath + uniqueName)) {
             Document document = createDocument(pdfData);
             PdfWriter.getInstance(document, outputStream);
             document.open();
@@ -51,7 +53,7 @@ public class PdfService {
             addFooterMessage(document, pdfData.getFooterMessage(), textColor);
 
             document.close();
-            return filePath;
+            return filePath+uniqueName;
         } catch (Exception e) {
             return handleException(e);
         }

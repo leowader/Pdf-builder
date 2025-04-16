@@ -19,7 +19,7 @@ public class PdfController {
 
     @PostMapping("/pdf")
     public ResponseEntity<Map<String, String>> processPdf(@RequestBody DtoPdf dtoPdf) {
-        String pdfPath = pdfService.generatePdf(pdfService.processPdf(dtoPdf), "src/main/resources/static/reporte.pdf");
+        String pdfPath = pdfService.generatePdf(pdfService.processPdf(dtoPdf), "src/main/resources/static/pdf/");
         Map<String, String> response = new HashMap<>();
         response.put("message", "PDF generated successfully");
         response.put("pdfPath", pdfPath);
