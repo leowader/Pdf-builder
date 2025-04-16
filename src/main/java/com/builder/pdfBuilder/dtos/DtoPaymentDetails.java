@@ -6,7 +6,7 @@ import java.time.LocalDate;
 @Getter
 public class DtoPaymentDetails {
     private double initialAmount;
-    private double totalTransfer;
+    private double finalAmount;
     private String paymentType;
     private String state;
     private LocalDate date;
@@ -15,7 +15,7 @@ public class DtoPaymentDetails {
         return "Método de pago: " + paymentType + "\n" +
                 "initialAmount: " + initialAmount + "\n" +
                 "state: " + state + "\n" +
-                "totalTransfer: " + totalTransfer + "\n" +
+                "finalAmount: " + finalAmount + "\n" +
                 "date: " + date;
     }
 }
