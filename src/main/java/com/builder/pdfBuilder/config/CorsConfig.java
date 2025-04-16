@@ -1,4 +1,4 @@
-package com.factroy.notification.config;
+package com.builder.pdfBuilder.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
