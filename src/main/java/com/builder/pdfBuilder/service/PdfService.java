@@ -1,13 +1,12 @@
 package com.builder.pdfBuilder.service;
 
-import com.builder.pdfBuilder.domain.builder.Pdf;
+import com.builder.pdfBuilder.domain.Pdf;
 import com.builder.pdfBuilder.dtos.DtoPdf;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;

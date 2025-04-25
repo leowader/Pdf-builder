@@ -1,14 +1,18 @@
-package com.builder.pdfBuilder.domain.builder;
+package com.builder.pdfBuilder.domain;
 
-import com.builder.pdfBuilder.domain.Format;
-import com.builder.pdfBuilder.domain.Theme;
+import com.builder.pdfBuilder.domain.Prototype.IPrototype;
+import com.builder.pdfBuilder.domain.builder.IBuilder;
 import com.builder.pdfBuilder.dtos.DtoPaymentDetails;
 import com.builder.pdfBuilder.dtos.DtoUserInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class Pdf {
+public class Pdf implements IPrototype<Pdf> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private boolean includeLogo;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -31,13 +35,50 @@ public class Pdf {
     private DtoUserInfo userInfo;
 
 
+    public Pdf(Pdf pdf) {
+        this.includeLogo = pdf.includeLogo;
+        this.title = pdf.getTitle();
+        this.includePaymentDetails = pdf.includePaymentDetails;
+        this.includeUserInfo = pdf.includeUserInfo;
+        this.theme = pdf.getTheme();
+        this.includeTimeStamp = pdf.includeTimeStamp;
+        this.footerMessage = pdf.getFooterMessage();
+        this.format = pdf.getFormat();
+        this.paymentDetails = pdf.getPaymentDetails();
+        this.userInfo = pdf.getUserInfo();
+    }
+
+    @Override
+    public Pdf clonacionSimple() {
+        return new Pdf(this);
+    }
+
+    @Override
+    public Pdf clonacionProfunda() {
+        DtoUserInfo user = this.getUserInfo().clonacionSimple();
+        DtoPaymentDetails paymentInfo = this.getPaymentDetails().clonacionSimple();
+        return new Pdf.PdfBuilder()
+                .userInfo(user)//CLONACION PROFUNDA
+                .includeLogo(this.isIncludeLogo())
+                .title(this.getTitle())
+                .includePaymentDetails(this.isIncludePaymentDetails())
+                .includeUserInfo(this.isIncludeUserInfo())
+                .theme(this.getTheme())
+                .includeTimeStamp(this.isIncludeTimeStamp())
+                .footerMessage(this.getFooterMessage())
+                .format(this.getFormat())
+                .paymentDetails(paymentInfo)//CLONACION PROFUNDA
+                .build();
+    }
+
+
     public static class PdfBuilder implements IBuilder {
         private final Pdf pdf = new Pdf();
 
 
         public PdfBuilder includeLogo(boolean includeLogo) {
             pdf.includeLogo = includeLogo;
-            return  this;
+            return this;
         }
 
         public PdfBuilder title(String title) {
@@ -83,6 +124,13 @@ public class Pdf {
         public PdfBuilder userInfo(DtoUserInfo userInfo) {
             pdf.userInfo = userInfo;
             return this;
+        }
+
+        @Override
+        public String toString() {
+            return "PdfBuilder{" +
+                    "pdf=" + pdf +
+                    '}';
         }
 
         @Override
