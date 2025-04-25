@@ -13,11 +13,11 @@ public class FactoryPrototypePdf {
         prototiposPdf.put(nombre, p);
     }
 
-    private static IPrototype<Pdf> obtenerPrototipoSimple(String nombre) {
+    public static IPrototype<Pdf> obtenerPrototipoSimple(String nombre) {
         return prototiposPdf.get(nombre).clonacionSimple();
     }
 
-    private static IPrototype<Pdf> obtenerPrototipoProfundo(String nombre) {
+    public static IPrototype<Pdf> obtenerPrototipoProfundo(String nombre) {
         return prototiposPdf.get(nombre).clonacionProfunda();
     }
 }

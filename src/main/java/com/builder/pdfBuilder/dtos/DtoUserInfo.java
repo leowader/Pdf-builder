@@ -4,10 +4,12 @@ import com.builder.pdfBuilder.domain.Prototype.IPrototype;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 public class DtoUserInfo implements IPrototype<DtoUserInfo> {
     private String identificacion;
     private String nombre;

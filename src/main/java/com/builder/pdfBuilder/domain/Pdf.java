@@ -55,8 +55,8 @@ public class Pdf implements IPrototype<Pdf> {
 
     @Override
     public Pdf clonacionProfunda() {
-        DtoUserInfo user = this.getUserInfo().clonacionSimple();
-        DtoPaymentDetails paymentInfo = this.getPaymentDetails().clonacionSimple();
+        DtoUserInfo user = this.userInfo.clonacionSimple();
+        DtoPaymentDetails paymentInfo = this.paymentDetails.clonacionSimple();
         return new Pdf.PdfBuilder()
                 .userInfo(user)//CLONACION PROFUNDA
                 .includeLogo(this.isIncludeLogo())

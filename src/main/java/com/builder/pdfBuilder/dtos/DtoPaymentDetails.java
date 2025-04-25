@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 public class DtoPaymentDetails implements IPrototype<DtoPaymentDetails> {
     private double initialAmount;
@@ -22,6 +21,14 @@ public class DtoPaymentDetails implements IPrototype<DtoPaymentDetails> {
         this.paymentType=dtoPaymentDetails.getPaymentType();
         this.state=dtoPaymentDetails.getState();
         this.date=dtoPaymentDetails.getDate();
+    }
+
+    public DtoPaymentDetails(double initialAmount, double finalAmount, String paymentType, String state, LocalDate date) {
+        this.initialAmount = initialAmount;
+        this.finalAmount = finalAmount;
+        this.paymentType = paymentType;
+        this.state = state;
+        this.date = date;
     }
 
     @Override

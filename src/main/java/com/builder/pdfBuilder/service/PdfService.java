@@ -2,8 +2,10 @@ package com.builder.pdfBuilder.service;
 
 import com.builder.pdfBuilder.domain.Pdf;
 import com.builder.pdfBuilder.dtos.DtoPdf;
+import com.builder.pdfBuilder.service.prototype.PrototypeServicePdf;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,6 @@ import java.util.UUID;
 
 @Service
 public class PdfService {
-
     public Pdf processPdf(DtoPdf dtoPdf) {
         return new Pdf.PdfBuilder()
                 .includeLogo(dtoPdf.isIncludeLogo())
