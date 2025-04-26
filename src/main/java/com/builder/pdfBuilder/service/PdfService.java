@@ -1,6 +1,7 @@
 package com.builder.pdfBuilder.service;
 
 import com.builder.pdfBuilder.domain.Pdf;
+import com.builder.pdfBuilder.domain.Prototype.FactoryPrototypePdf;
 import com.builder.pdfBuilder.dtos.DtoPdf;
 import com.builder.pdfBuilder.service.prototype.PrototypeServicePdf;
 import com.itextpdf.text.*;
@@ -17,19 +18,31 @@ import java.util.UUID;
 
 @Service
 public class PdfService {
+
+    @Autowired
+    private PrototypeServicePdf prototypeServicePdf;
+
     public Pdf processPdf(DtoPdf dtoPdf) {
-        return new Pdf.PdfBuilder()
-                .includeLogo(dtoPdf.isIncludeLogo())
-                .title(dtoPdf.getTitle())
-                .includePaymentDetails(dtoPdf.isIncludePaymentDetails())
-                .includeUserInfo(dtoPdf.isIncludeUserInfo())
-                .theme(dtoPdf.getTheme())
-                .includeTimeStamp(dtoPdf.isIncludeTimeStamp())
-                .footerMessage(dtoPdf.getFooterMessage())
-                .format(dtoPdf.getFormat())
-                .userInfo(dtoPdf.getUserInfo())
-                .paymentDetails(dtoPdf.getPaymentDetails())
-                .build();
+
+
+        String type = dtoPdf.isIncludeUserInfo() && dtoPdf.isIncludePaymentDetails() ? "fullInfo" :
+                dtoPdf.isIncludeUserInfo() ? "userInfo" :
+                        dtoPdf.isIncludePaymentDetails() ? "paymentInfo" : "";
+
+        Pdf pdf = prototypeServicePdf.clonacionProfunda(type);
+        pdf.setTitle(dtoPdf.getTitle());
+        pdf.setFooterMessage(dtoPdf.getFooterMessage());
+        pdf.setTheme(dtoPdf.getTheme());
+        pdf.setFormat(dtoPdf.getFormat());
+        pdf.setIncludeLogo(dtoPdf.isIncludeLogo());
+        pdf.setIncludeTimeStamp(dtoPdf.isIncludeTimeStamp());
+        if (pdf.isIncludeUserInfo()) {
+            pdf.setUserInfo(dtoPdf.getUserInfo());
+        }
+        if (pdf.isIncludePaymentDetails()) {
+            pdf.setPaymentDetails(dtoPdf.getPaymentDetails());
+        }
+        return pdf;
     }
 
 

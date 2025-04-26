@@ -8,10 +8,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class Pdf implements IPrototype<Pdf> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private boolean includeLogo;
@@ -122,6 +124,8 @@ public class Pdf implements IPrototype<Pdf> {
         }
 
         public PdfBuilder userInfo(DtoUserInfo userInfo) {
+
+
             pdf.userInfo = userInfo;
             return this;
         }

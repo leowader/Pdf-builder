@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Service
 public class PrototypeServicePdf {
 
-
     public PrototypeServicePdf() {
         DtoUserInfo userDefault = new DtoUserInfo("222222222222", "usuario final");
         Pdf pdfDefaultUserInfo = new Pdf.PdfBuilder()
@@ -41,6 +40,21 @@ public class PrototypeServicePdf {
                 .title("Informe (Titulo Generado por defecto de la plantilla:  paymentInfo)")
                 .footerMessage("Informe generado correctamente (Mensaje Generado por defecto de la plantilla:  paymentInfo)")
                 .build();
+
+        Pdf pdfDefaultFullInfo = new Pdf.PdfBuilder()
+                .includeLogo(true)
+                .theme(Theme.LIGHT)
+                .includeTimeStamp(true)
+                .format(Format.A4)
+                .userInfo(userDefault)
+                .paymentDetails(new DtoPaymentDetails(0, 0, "DEFAULT", "OK", LocalDate.now()))
+                .includeUserInfo(true)
+                .includePaymentDetails(true)
+                .title("Informe (Título generado por defecto de la plantilla: fullInfo)")
+                .footerMessage("Informe generado correctamente (Mensaje generado por defecto de la plantilla: fullInfo)")
+                .build();
+
+        FactoryPrototypePdf.agregarPrototipo("fullInfo", pdfDefaultFullInfo);
         FactoryPrototypePdf.agregarPrototipo("userInfo", pdfDefaultUserInfo);//PROTOTIPO 1 (PLANTILLA userInfo)
         FactoryPrototypePdf.agregarPrototipo("paymentInfo", pdfDefaultPaymentInfo);//PROTOTIPO 2 (PLANTILLA paymentInfo)
     }

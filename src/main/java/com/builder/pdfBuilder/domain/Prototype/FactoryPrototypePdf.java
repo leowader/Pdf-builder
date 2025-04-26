@@ -1,7 +1,6 @@
 package com.builder.pdfBuilder.domain.Prototype;
 
 import com.builder.pdfBuilder.domain.Pdf;
-
 import java.util.HashMap;
 import java.util.Map;
 
